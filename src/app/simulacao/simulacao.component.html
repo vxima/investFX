@@ -1,0 +1,34 @@
+<div class="container">
+    <h2>Simulação</h2>
+  
+    <form [formGroup]="simulacaoForm">
+      <mat-card class="card-input">
+        <mat-form-field>
+          <label for="valor">Valor:</label>
+          <input id="valor" type="number" formControlName="valor">
+        </mat-form-field>
+        <mat-form-field>
+          <label for="taxaJuros">Juros:</label>
+          <input id="taxaJuros" type="number" formControlName="taxaJuros">
+        </mat-form-field>
+        <mat-form-field>
+          <label for="tempo">Tempo:</label>
+          <input id="tempo" type="number" formControlName="tempo">
+        </mat-form-field>
+        
+        <mat-form-field>
+          <mat-label for="periodo">Periodo:</mat-label>
+          <mat-select formControlName="periodo">
+            <mat-option value="mes">Meses</mat-option>
+            <mat-option value="ano">Anos</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <p>You selected: {{simulacaoForm.get('periodo')?.value}}</p>
+      </mat-card>
+    </form>
+  
+    <div class="output">
+      <h3>Resultado: {{ resultado }}</h3>
+    </div>
+  </div>
+  
