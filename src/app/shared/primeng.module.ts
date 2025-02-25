@@ -20,6 +20,7 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { SelectModule  } from 'primeng/select';
 import { AccordionModule } from 'primeng/accordion';
 import { PanelModule } from 'primeng/panel';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [],
@@ -27,6 +28,7 @@ import { PanelModule } from 'primeng/panel';
     CommonModule,
     ButtonModule,
     CardModule,
+    ChartModule,
     DropdownModule,
     InputNumberModule,
     InputTextModule,
@@ -49,6 +51,7 @@ import { PanelModule } from 'primeng/panel';
   exports: [
     ButtonModule,
     CardModule,
+    ChartModule,
     DropdownModule,
     InputNumberModule,
     InputTextModule,

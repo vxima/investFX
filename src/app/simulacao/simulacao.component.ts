@@ -19,6 +19,8 @@ import { CommonModule } from '@angular/common';
 export class SimulacaoComponent {
   simulacaoForm: FormGroup;
   resultado: number = 0;
+  chartData: any;
+  chartOptions: any;
   periodoOptions = [
     { label: 'Meses', value: 'mes' },
     { label: 'Anos', value: 'ano' }
@@ -36,6 +38,15 @@ export class SimulacaoComponent {
 
     });
 
+    this.chartOptions = {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top'
+        }
+      }
+    };
+
   }
 
   calcularMontante(){
@@ -43,14 +54,38 @@ export class SimulacaoComponent {
     this.resultado = formulasJurosUtils.calcularJurosCompostosAporteMensal(formValues.valorInicial, formValues.aporteMensal, formValues.taxaJuros, formValues.tempo)
   }
 
+  calcularMontante2() {
+    const valorInicial = this.simulacaoForm.value.valorInicial;
+    const aporteMensal = this.simulacaoForm.value.aporteMensal;
+    const taxaJuros = this.simulacaoForm.value.taxaJuros / 100;
+    const tempo = this.simulacaoForm.value.tempo;
+    if(this.simulacaoForm.value.periodo == 'ano'){
+      const tempo = 12 * this.simulacaoForm.value.tempo;
+    }
+    
+    let montante = valorInicial;
+    const valores = [valorInicial];
+
+    for (let i = 1; i <= tempo; i++) {
+      montante = montante * (1 + taxaJuros) + aporteMensal;
+      valores.push(montante);
+    }
+
+    this.chartData = {
+      labels: Array.from({ length: tempo + 1 }, (_, i) => `Mês ${i}`),
+      datasets: [
+        {
+          label: 'Montante Acumulado',
+          data: valores,
+          backgroundColor: 'rgba(75, 192, 192, 0.6)'
+        }
+      ]
+    };
+  }
+
   limpar(){
     console.log(this.simulacaoForm.value)
-    this.simulacaoForm.reset({
-      valorInicial: 0.0,
-      aporteMensal: 0.0,
-      taxaJuros: 0.0,
-      tempo: 0,
-      periodo: 'mes'
-    });
+    this.simulacaoForm.reset();
+    this.chartData = null;
   }
 }

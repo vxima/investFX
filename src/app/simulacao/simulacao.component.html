@@ -1,51 +1,63 @@
-<div class="container">
-  <p-card class="card-container">
-    <ng-template pTemplate="header">
-      <h3>Simulação - Renda Fixa</h3>
-    </ng-template>
+<div class="container grid">
+  <!-- Formulário (Esquerda) -->
+  <div class="col-6">
+    <p-card class="card-container">
+      <ng-template pTemplate="header">
+        <h3>Simulação - Renda Fixa</h3>
+      </ng-template>
 
-    <ng-template pTemplate="content">
-      <form [formGroup]="simulacaoForm">
-        <div class="form-container">
-          <div class="p-fluid grid">
-            <div class="flex flex-col gap-2">
-              <label for="valorInicial">Valor inicial: <span class="required">*</span></label>
-              <p-inputNumber id="valorInicial" formControlName="valorInicial" mode="decimal"></p-inputNumber>
-            </div>
+      <ng-template pTemplate="content">
+        <form [formGroup]="simulacaoForm">
+          <div class="form-container">
+            <div class="p-fluid grid">
+              <div class="col-12">
+                <label for="valorInicial">Valor inicial: <span class="required">*</span></label>
+                <p-inputNumber id="valorInicial" formControlName="valorInicial" mode="decimal"></p-inputNumber>
+              </div>
 
-            <div class="col-6">
-              <label for="aporteMensal">Aporte mensal:</label>
-              <p-inputNumber id="aporteMensal" formControlName="aporteMensal" mode="decimal"></p-inputNumber>
-            </div>
+              <div class="col-6">
+                <label for="aporteMensal">Aporte mensal:</label>
+                <p-inputNumber id="aporteMensal" formControlName="aporteMensal" mode="decimal"></p-inputNumber>
+              </div>
 
-            <div class="col-6">
-              <label for="taxaJuros">Juros: <span class="required">*</span></label>
-              <p-inputNumber id="taxaJuros" formControlName="taxaJuros" mode="decimal"></p-inputNumber>
-            </div>
+              <div class="col-6">
+                <label for="taxaJuros">Juros: <span class="required">*</span></label>
+                <p-inputNumber id="taxaJuros" formControlName="taxaJuros" mode="decimal"></p-inputNumber>
+              </div>
 
-            <div class="col-6">
-              <label for="tempo">Tempo: <span class="required">*</span></label>
-              <p-inputNumber id="tempo" formControlName="tempo" mode="decimal"></p-inputNumber>
-            </div>
+              <div class="col-6">
+                <label for="tempo">Tempo: <span class="required">*</span></label>
+                <p-inputNumber id="tempo" formControlName="tempo" mode="decimal"></p-inputNumber>
+              </div>
 
-            <div class="col-12">
-              <label for="periodo">Período: <span class="required">*</span></label>
-              <p-select id="periodo" formControlName="periodo" [options]="periodoOptions" placeholder="Selecione"></p-select>
+              <div class="col-12">
+                <label for="periodo">Período: <span class="required">*</span></label>
+                <p-select id="periodo" formControlName="periodo" [options]="periodoOptions" placeholder="Selecione"></p-select>
+              </div>
             </div>
           </div>
+        </form>
+      </ng-template>
+
+      <ng-template pTemplate="footer">
+        <div class="button-group">
+          <p-button label="Calcular" icon="pi pi-check" (click)="calcularMontante2()" [disabled]="simulacaoForm.invalid"></p-button>
+          <p-button label="Limpar" icon="pi pi-refresh" (click)="limpar()"></p-button>
         </div>
-      </form>
-    </ng-template>
+      </ng-template>
+    </p-card>
+  </div>
 
-    <ng-template pTemplate="footer">
-      <div class="button-group">
-        <p-button label="Calcular" icon="pi pi-check" (click)="calcularMontante()" [disabled]="simulacaoForm.invalid"></p-button>
-        <p-button label="Limpar" icon="pi pi-refresh" (click)="limpar()"></p-button>
-      </div>
-    </ng-template>
-  </p-card>
-</div>
+  <!-- Gráfico (Direita) -->
+  <div class="col-6">
+    <p-card class="card-container">
+      <ng-template pTemplate="header">
+        <h3>Gráfico de Crescimento</h3>
+      </ng-template>
 
-<div class="output">
-  <h3>Resultado: {{ resultado }}</h3>
+      <ng-template pTemplate="content">
+        <p-chart type="bar" [data]="chartData" [options]="chartOptions"></p-chart>
+      </ng-template>
+    </p-card>
+  </div>
 </div>
