@@ -1,34 +1,51 @@
 <div class="container">
-    <h2>Simulação</h2>
-  
-    <form [formGroup]="simulacaoForm">
-      <mat-card class="card-input">
-        <mat-form-field>
-          <label for="valor">Valor:</label>
-          <input id="valor" type="number" formControlName="valor">
-        </mat-form-field>
-        <mat-form-field>
-          <label for="taxaJuros">Juros:</label>
-          <input id="taxaJuros" type="number" formControlName="taxaJuros">
-        </mat-form-field>
-        <mat-form-field>
-          <label for="tempo">Tempo:</label>
-          <input id="tempo" type="number" formControlName="tempo">
-        </mat-form-field>
-        
-        <mat-form-field>
-          <mat-label for="periodo">Periodo:</mat-label>
-          <mat-select formControlName="periodo">
-            <mat-option value="mes">Meses</mat-option>
-            <mat-option value="ano">Anos</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <p>You selected: {{simulacaoForm.get('periodo')?.value}}</p>
-      </mat-card>
-    </form>
-  
-    <div class="output">
-      <h3>Resultado: {{ resultado }}</h3>
-    </div>
-  </div>
-  
+  <p-card class="card-container">
+    <ng-template pTemplate="header">
+      <h3>Simulação - Renda Fixa</h3>
+    </ng-template>
+
+    <ng-template pTemplate="content">
+      <form [formGroup]="simulacaoForm">
+        <div class="form-container">
+          <div class="p-fluid grid">
+            <div class="flex flex-col gap-2">
+              <label for="valorInicial">Valor inicial: <span class="required">*</span></label>
+              <p-inputNumber id="valorInicial" formControlName="valorInicial" mode="decimal"></p-inputNumber>
+            </div>
+
+            <div class="col-6">
+              <label for="aporteMensal">Aporte mensal:</label>
+              <p-inputNumber id="aporteMensal" formControlName="aporteMensal" mode="decimal"></p-inputNumber>
+            </div>
+
+            <div class="col-6">
+              <label for="taxaJuros">Juros: <span class="required">*</span></label>
+              <p-inputNumber id="taxaJuros" formControlName="taxaJuros" mode="decimal"></p-inputNumber>
+            </div>
+
+            <div class="col-6">
+              <label for="tempo">Tempo: <span class="required">*</span></label>
+              <p-inputNumber id="tempo" formControlName="tempo" mode="decimal"></p-inputNumber>
+            </div>
+
+            <div class="col-12">
+              <label for="periodo">Período: <span class="required">*</span></label>
+              <p-select id="periodo" formControlName="periodo" [options]="periodoOptions" placeholder="Selecione"></p-select>
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+      <div class="button-group">
+        <p-button label="Calcular" icon="pi pi-check" (click)="calcularMontante()" [disabled]="simulacaoForm.invalid"></p-button>
+        <p-button label="Limpar" icon="pi pi-refresh" (click)="limpar()"></p-button>
+      </div>
+    </ng-template>
+  </p-card>
+</div>
+
+<div class="output">
+  <h3>Resultado: {{ resultado }}</h3>
+</div>
