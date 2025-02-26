@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { formulasJurosUtils } from '../shared/utils/formulas-juros-utils';
-import { MaterialModule } from '../shared/material.module';
-import { PrimengModule } from '../shared/primeng.module';
+import { MaterialModule } from '../shared/modules/material.module';
+import { PrimengModule } from '../shared/modules/primeng.module';
 import { CommonModule } from '@angular/common';
+import { SimulacaoPanelComponent } from "../shared/panels/simulacaoPanel/simulacao-panel/simulacao-panel.component";
 
 @Component({
   selector: 'app-simulacao',
   imports: [CommonModule,
-            ReactiveFormsModule, 
-            MaterialModule,
-            PrimengModule
-  ],
+    ReactiveFormsModule,
+    MaterialModule,
+    PrimengModule, 
+    SimulacaoPanelComponent],
   templateUrl: './simulacao.component.html',
   styleUrl: './simulacao.component.scss',
   standalone: true
@@ -21,6 +22,8 @@ export class SimulacaoComponent implements OnInit {
   resultado: number = 0;
   chartData: any;
   chartOptions: any;
+  activePanels : number[]= [1]
+  percentual: number = 25;
   periodoOptions = [
     { label: 'Meses', value: 'mes' },
     { label: 'Anos', value: 'ano' }
@@ -37,6 +40,7 @@ export class SimulacaoComponent implements OnInit {
     { label: 'Gráfico', icon: 'pi pi-chart-bar', command: () => this.activeTab = 'grafico' },
     { label: 'Dados', icon: 'pi pi-table', command: () => this.activeTab = 'dados' }
   ];
+
 
   onTabChange(event: any) {
     this.activeTab = event.item.label.toLowerCase();

@@ -26,6 +26,7 @@ import { IconField } from 'primeng/iconfield';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { TabsModule } from 'primeng/tabs';
 import { TabMenuModule } from 'primeng/tabmenu'; 
+import { ProgressBarModule } from 'primeng/progressbar';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
     FloatLabelModule,
     TabsModule,
     TabMenuModule,
+    ProgressBarModule,
   ],
   exports: [
     ButtonModule,
@@ -86,6 +88,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
     FloatLabelModule,
     TabsModule,
     TabMenuModule,
+    ProgressBarModule,
   ]
 })
 export class PrimengModule { }

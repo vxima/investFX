@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { PrimengModule } from './shared/primeng.module';
+import { PrimengModule } from './shared/modules/primeng.module';
 
 @Component({
   selector: 'app-root',

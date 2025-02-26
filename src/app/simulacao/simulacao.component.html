@@ -113,8 +113,38 @@
           <p-chart type="bar" [data]="chartData" [options]="chartOptions"></p-chart>
         </div>
         <div *ngIf="activeTab === 'dados'">
-          <h3>Dados</h3>
-          <p>Montante: {{ montante | currency:'BRL' }}</p>
+          <p-accordion [activeIndex]="activePanels" [multiple]="true">
+            <app-simulacao-panel  
+              [titulo]="'Poupança'"
+              [percentual]="percentual"
+              [valorInvestido]="2"
+              [rendimentoBruto]="2"
+              [rendimentoLiquido]="2"
+              [valorLiquido]="2">>
+            </app-simulacao-panel>
+            @if (simulacaoForm.get('taxaCDB')?.value){
+              <app-simulacao-panel  
+                [titulo]="'CDB'"
+                [percentual]="percentual"
+                [valorInvestido]="2"
+                [rendimentoBruto]="2"
+                [rendimentoLiquido]="2"
+                [valorLiquido]="2">>
+            </app-simulacao-panel>
+            }
+
+            @if (simulacaoForm.get('taxaLC')?.value){
+              <app-simulacao-panel  
+                [titulo]="'LCA / LCI'"
+                [percentual]="percentual"
+                [valorInvestido]="2"
+                [rendimentoBruto]="2"
+                [rendimentoLiquido]="2"
+                [valorLiquido]="2">>
+            </app-simulacao-panel>
+            }
+          </p-accordion>
+          
         </div>
       </ng-template>
     </p-card>

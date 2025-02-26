@@ -1,0 +1,10 @@
+<p-accordion-panel>
+    <p-accordion-header>{{ titulo }}</p-accordion-header>
+    <p-accordion-content>
+      <p>Valor total investido: {{ valorInvestido }}</p> 
+      <p>Rendimento bruto: {{ rendimentoBruto }}</p>
+      <p>Rendimento liquido: {{ rendimentoLiquido }}</p>
+      <p>Valor total liquido: {{ valorLiquido }}</p>
+      <p-progressBar [value]="percentual" [showValue]="true"></p-progressBar>
+    </p-accordion-content>
+  </p-accordion-panel>
