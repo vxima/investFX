@@ -21,6 +21,10 @@ import { SelectModule  } from 'primeng/select';
 import { AccordionModule } from 'primeng/accordion';
 import { PanelModule } from 'primeng/panel';
 import { ChartModule } from 'primeng/chart';
+import { InputIcon } from 'primeng/inputicon';
+import { IconField } from 'primeng/iconfield';
+import { FloatLabelModule } from 'primeng/floatlabel';
+
 
 @NgModule({
   declarations: [],
@@ -47,6 +51,9 @@ import { ChartModule } from 'primeng/chart';
     SelectModule,
     AccordionModule,
     PanelModule,  
+    InputIcon,
+    IconField,
+    FloatLabelModule,
   ],
   exports: [
     ButtonModule,
@@ -70,6 +77,9 @@ import { ChartModule } from 'primeng/chart';
     SelectModule,
     AccordionModule,
     PanelModule,
+    InputIcon,
+    IconField,
+    FloatLabelModule,
   ]
 })
 export class PrimengModule { }

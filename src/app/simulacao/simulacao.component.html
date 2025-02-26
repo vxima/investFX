@@ -9,31 +9,75 @@
       <ng-template pTemplate="content">
         <form [formGroup]="simulacaoForm">
           <div class="form-container">
-            <div class="p-fluid grid">
-              <div class="col-12">
-                <label for="valorInicial">Valor inicial: <span class="required">*</span></label>
-                <p-inputNumber id="valorInicial" formControlName="valorInicial" mode="decimal"></p-inputNumber>
-              </div>
+            <div class="p-fluid p-grid">
 
-              <div class="col-6">
-                <label for="aporteMensal">Aporte mensal:</label>
-                <p-inputNumber id="aporteMensal" formControlName="aporteMensal" mode="decimal"></p-inputNumber>
-              </div>
+              <p-inputgroup>
+                <p-inputGroupAddon>
+                  <i class="pi pi-dollar"></i>
+                </p-inputGroupAddon>
+                <p-floatlabel  variant="in">
+                  <p-inputNumber id="valorInicial" formControlName="valorInicial"
+                    mode="currency" currency="BRL" min="0.0" > </p-inputNumber>
+                  <label for="valorInicial">Valor inicial</label>
+                </p-floatlabel>
+              </p-inputgroup>
+                
+              <p-inputgroup>
+                <p-inputGroupAddon>
+                  <i class="pi pi-dollar"></i>
+                </p-inputGroupAddon>
+                <p-floatlabel  variant="in">
+                  <p-inputNumber id="aporteMensal" formControlName="aporteMensal"
+                    mode="currency" currency="BRL" min="0.0" > </p-inputNumber>
+                  <label for="aporteMensal">Aporte mensal</label>
+                </p-floatlabel>
+              </p-inputgroup>
 
-              <div class="col-6">
-                <label for="taxaJuros">Juros: <span class="required">*</span></label>
-                <p-inputNumber id="taxaJuros" formControlName="taxaJuros" mode="decimal"></p-inputNumber>
-              </div>
+              <p-inputGroup>
+                <p-inputGroupAddon>
+                  <i class="pi pi-calendar"></i>
+                </p-inputGroupAddon>
+                <p-floatlabel  variant="in">
+                 <p-inputNumber formControlName="tempo" [min]="1"></p-inputNumber>
+                 <label for="tempo">Tempo</label>
+                </p-floatlabel>
+                <p-inputGroupAddon>
+                  <p-select [options]="periodoOptions" formControlName="periodo"></p-select>
+                </p-inputGroupAddon>
+              </p-inputGroup>
 
-              <div class="col-6">
-                <label for="tempo">Tempo: <span class="required">*</span></label>
-                <p-inputNumber id="tempo" formControlName="tempo" mode="decimal"></p-inputNumber>
-              </div>
+              <p-inputgroup>
+                <p-inputGroupAddon>
+                  <i class="pi pi-chart-line"></i>
+                </p-inputGroupAddon>
+                <p-floatlabel  variant="in">
+                  <p-inputNumber id="taxaDI" formControlName="taxaDI"
+                    mode="decimal" min="0.0" > </p-inputNumber>
+                  <label for="taxaDI">Taxa DI</label>
+                </p-floatlabel>
+              </p-inputgroup>
 
-              <div class="col-12">
-                <label for="periodo">Período: <span class="required">*</span></label>
-                <p-select id="periodo" formControlName="periodo" [options]="periodoOptions" placeholder="Selecione"></p-select>
-              </div>
+              <p-inputgroup>
+                <p-inputGroupAddon>
+                  <i class="pi pi-percentage"></i>
+                </p-inputGroupAddon>
+                <p-floatlabel  variant="in">
+                  <p-inputNumber id="taxaCDB" formControlName="taxaCDB"
+                    mode="decimal" min="0.0" > </p-inputNumber>
+                  <label for="taxaCDB">Taxa CDB</label>
+                </p-floatlabel>
+              </p-inputgroup>
+
+              <p-inputgroup>
+                <p-inputGroupAddon>
+                  <i class="pi pi-percentage"></i>
+                </p-inputGroupAddon>
+                <p-floatlabel  variant="in">
+                  <p-inputNumber id="taxaLC" formControlName="taxaLC"
+                    mode="decimal" min="0.0" > </p-inputNumber>
+                  <label for="taxaLC">Taxa LCA/LCI</label>
+                </p-floatlabel>
+              </p-inputgroup>
             </div>
           </div>
         </form>
@@ -41,8 +85,8 @@
 
       <ng-template pTemplate="footer">
         <div class="button-group">
-          <p-button label="Calcular" icon="pi pi-check" (click)="calcularMontante2()" [disabled]="simulacaoForm.invalid"></p-button>
-          <p-button label="Limpar" icon="pi pi-refresh" (click)="limpar()"></p-button>
+          <p-button on label="Calcular" (click)="calcularMontante2()" [disabled]="simulacaoForm.invalid"></p-button>
+          <p-button label="Limpar" (click)="limpar()"></p-button>
         </div>
       </ng-template>
     </p-card>

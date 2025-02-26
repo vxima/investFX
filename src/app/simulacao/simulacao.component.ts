@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { formulasJurosUtils } from '../shared/utils/formulas-juros-utils';
 import { MaterialModule } from '../shared/material.module';
@@ -16,8 +16,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './simulacao.component.scss',
   standalone: true
 })
-export class SimulacaoComponent {
-  simulacaoForm: FormGroup;
+export class SimulacaoComponent implements OnInit {
+  simulacaoForm!: FormGroup;
   resultado: number = 0;
   chartData: any;
   chartOptions: any;
@@ -29,14 +29,6 @@ export class SimulacaoComponent {
   constructor(
     private readonly fb: FormBuilder
   ) {
-    this.simulacaoForm = this.fb.group({
-      valorInicial: [0.0 , [Validators.required]],
-      aporteMensal: [0.0], //opcional
-      taxaJuros: [0.0, [Validators.required]],
-      tempo: [0, [Validators.required]],
-      periodo: ['mes', [Validators.required]],
-
-    });
 
     this.chartOptions = {
       responsive: true,
@@ -49,6 +41,32 @@ export class SimulacaoComponent {
 
   }
 
+  ngOnInit() {
+    // Inicializa o formulário
+    this.simulacaoForm = this.fb.group({
+      valorInicial: [0.0 , [Validators.required]],
+      aporteMensal: [0.0], //opcional
+      taxaDI: [0.0, [Validators.required]],
+      taxaLC: [0.0, [Validators.required]],
+      taxaCDB: [0.0, [Validators.required]],
+      tempo: [0, [Validators.required]],
+      periodo: ['mes', [Validators.required]],
+
+    });
+
+    this.aplicarTransformacaoNasTaxas(['taxaDI', 'taxaLC', 'taxaCDB']);
+  }
+
+  private aplicarTransformacaoNasTaxas(campos: string[]) {
+    campos.forEach(campo => {
+      this.simulacaoForm.get(campo)?.valueChanges.subscribe(value => {
+        if (value !== null && value !== undefined) {
+          let numericValue = Number(value.toString().replace(/\D/g, '')); // Remove não números
+          this.simulacaoForm.get(campo)?.setValue(numericValue / 100, { emitEvent: false }); // Divide por 100
+        }
+      });
+    });
+  }
   calcularMontante(){
     const formValues = this.simulacaoForm.value; 
     this.resultado = formulasJurosUtils.calcularJurosCompostosAporteMensal(formValues.valorInicial, formValues.aporteMensal, formValues.taxaJuros, formValues.tempo)
@@ -88,4 +106,6 @@ export class SimulacaoComponent {
     this.simulacaoForm.reset();
     this.chartData = null;
   }
+
+  
 }
