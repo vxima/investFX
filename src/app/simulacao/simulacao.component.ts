@@ -5,6 +5,7 @@ import { MaterialModule } from '../shared/modules/material.module';
 import { PrimengModule } from '../shared/modules/primeng.module';
 import { CommonModule } from '@angular/common';
 import { SimulacaoPanelComponent } from "../shared/panels/simulacaoPanel/simulacao-panel/simulacao-panel.component";
+import { convertToParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-simulacao',
@@ -71,7 +72,7 @@ export class SimulacaoComponent implements OnInit {
       taxaCDB: [0.0,],
       tempo: [0, [Validators.required]],
       periodo: ['mes', [Validators.required]],
-      fixadoCDB: ['pos'] ,
+      fixadoCDB: ['pos'],
       fixadoLC: ['pos'] 
 
     });
@@ -123,11 +124,39 @@ export class SimulacaoComponent implements OnInit {
     };
   }
 
+  // Dados 
+  calcularValorTotalInvestido() : number {
+    return this.simulacaoForm.value.valorInicial  + this.simulacaoForm.value.aporteMensal * this.simulacaoForm.value.tempo;
+  }
+
+  calcularRendimentoBruto(montante: number, valorTotalInvestido: number) : number {
+
+    return montante - valorTotalInvestido;
+  }
+
+  calcularImpostoRenda(valorRendimentoBruto : number , taxaIR: number) : number{
+    return valorRendimentoBruto * taxaIR/100;
+  }
+
+  calcularRendimentoLiquido(valorTotalInvestido:number ,valorImpostoRenda:number ) : number {
+    return valorTotalInvestido - valorImpostoRenda
+  }
+
+  calcularValorTotalLiquido(valorTotalInvestido: number , valorRendimentoBruto : number) : number {
+    return valorTotalInvestido + valorRendimentoBruto
+  }
+
+  calcularPorcentagemRendimento(valorTotalLiquido: number, valorTotalInvestido:number) : number {
+    return valorTotalLiquido/valorTotalInvestido
+  }
+
+  // Botoes
   limpar(){
     console.log(this.simulacaoForm.value)
     this.simulacaoForm.reset();
     this.chartData = null;
   }
 
+  
   
 }
