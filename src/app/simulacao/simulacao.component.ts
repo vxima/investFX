@@ -25,6 +25,22 @@ export class SimulacaoComponent implements OnInit {
     { label: 'Meses', value: 'mes' },
     { label: 'Anos', value: 'ano' }
   ];
+  fixadoOptions = [
+    {label: "Pré-fixado", value:'pre'},
+    {label: "Pós-fixado", value:'pos'},
+  ]
+
+  activeTab: string = 'grafico';
+  montante: number = 10000; // Exemplo de valor
+
+  tabs = [
+    { label: 'Gráfico', icon: 'pi pi-chart-bar', command: () => this.activeTab = 'grafico' },
+    { label: 'Dados', icon: 'pi pi-table', command: () => this.activeTab = 'dados' }
+  ];
+
+  onTabChange(event: any) {
+    this.activeTab = event.item.label.toLowerCase();
+  }
 
   constructor(
     private readonly fb: FormBuilder
@@ -45,12 +61,14 @@ export class SimulacaoComponent implements OnInit {
     // Inicializa o formulário
     this.simulacaoForm = this.fb.group({
       valorInicial: [0.0 , [Validators.required]],
-      aporteMensal: [0.0], //opcional
+      aporteMensal: [0.0], 
       taxaDI: [0.0, [Validators.required]],
-      taxaLC: [0.0, [Validators.required]],
-      taxaCDB: [0.0, [Validators.required]],
+      taxaLC: [0.0, ],
+      taxaCDB: [0.0,],
       tempo: [0, [Validators.required]],
       periodo: ['mes', [Validators.required]],
+      fixadoCDB: ['pos'] ,
+      fixadoLC: ['pos'] 
 
     });
 

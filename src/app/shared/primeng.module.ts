@@ -24,6 +24,8 @@ import { ChartModule } from 'primeng/chart';
 import { InputIcon } from 'primeng/inputicon';
 import { IconField } from 'primeng/iconfield';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { TabsModule } from 'primeng/tabs';
+import { TabMenuModule } from 'primeng/tabmenu'; 
 
 
 @NgModule({
@@ -54,6 +56,8 @@ import { FloatLabelModule } from 'primeng/floatlabel';
     InputIcon,
     IconField,
     FloatLabelModule,
+    TabsModule,
+    TabMenuModule,
   ],
   exports: [
     ButtonModule,
@@ -80,6 +84,8 @@ import { FloatLabelModule } from 'primeng/floatlabel';
     InputIcon,
     IconField,
     FloatLabelModule,
+    TabsModule,
+    TabMenuModule,
   ]
 })
 export class PrimengModule { }

@@ -9,11 +9,25 @@ export class formulasJurosUtils{
         meses: number
     ) : number {
         return (
-            capitalInicial * Math.pow(1 + this.convertToPercentage(taxaJurosMensal), meses) +
-            (aporteMensal * (Math.pow(1 + this.convertToPercentage(taxaJurosMensal), meses) - 1)) / this.convertToPercentage(taxaJurosMensal)
+            capitalInicial * Math.pow(1 + this.convertToPercentage(taxaJurosMensal), meses/12) +
+            (aporteMensal * (Math.pow(1 + this.convertToPercentage(taxaJurosMensal), meses/12) - 1)) / this.convertToPercentage(taxaJurosMensal)
         );
     }
 
+    public static calcularPoupanca(capitalInicial: number, 
+        aporteMensal: number, 
+        taxaSelic: number,
+        meses: number) : number{
+            var taxaPoupança
+            if(taxaSelic >=8.5){
+                taxaPoupança = 6.17;
+            }
+            else{
+                taxaPoupança = 0.7 * taxaSelic  
+            }
+
+            return this.calcularJurosCompostosAporteMensal(capitalInicial, aporteMensal, taxaPoupança, meses)
+        }
     public static calcularCDB(capitalInicial: number, 
         aporteMensal: number, 
         taxaDI: number, 
@@ -46,6 +60,8 @@ export class formulasJurosUtils{
         return this.calcularJurosCompostosAporteMensal(capitalInicial, aporteMensal, taxaDI*this.convertToPercentage(taxaLC), meses)
     }
 
+
+    // Auxiliares
     public static convertToPercentage(value:number) : number{
         return value/100.00;
     }

@@ -38,7 +38,7 @@
                   <i class="pi pi-calendar"></i>
                 </p-inputGroupAddon>
                 <p-floatlabel  variant="in">
-                 <p-inputNumber formControlName="tempo" [min]="1"></p-inputNumber>
+                 <p-inputNumber id="tempo" formControlName="tempo" [min]="1"></p-inputNumber>
                  <label for="tempo">Tempo</label>
                 </p-floatlabel>
                 <p-inputGroupAddon>
@@ -55,6 +55,9 @@
                     mode="decimal" min="0.0" > </p-inputNumber>
                   <label for="taxaDI">Taxa DI</label>
                 </p-floatlabel>
+                <p-inputGroupAddon>
+                  % a.a.
+                </p-inputGroupAddon>
               </p-inputgroup>
 
               <p-inputgroup>
@@ -66,6 +69,9 @@
                     mode="decimal" min="0.0" > </p-inputNumber>
                   <label for="taxaCDB">Taxa CDB</label>
                 </p-floatlabel>
+                <p-inputGroupAddon>
+                  <p-select [options]="fixadoOptions" formControlName="fixadoCDB"></p-select>
+                </p-inputGroupAddon>
               </p-inputgroup>
 
               <p-inputgroup>
@@ -77,6 +83,9 @@
                     mode="decimal" min="0.0" > </p-inputNumber>
                   <label for="taxaLC">Taxa LCA/LCI</label>
                 </p-floatlabel>
+                <p-inputGroupAddon>
+                  <p-select [options]="fixadoOptions" formControlName="fixadoLC"></p-select>
+                </p-inputGroupAddon>
               </p-inputgroup>
             </div>
           </div>
@@ -96,11 +105,17 @@
   <div class="col-6">
     <p-card class="card-container">
       <ng-template pTemplate="header">
-        <h3>Gráfico de Crescimento</h3>
+        <p-tabMenu [model]="tabs" (onTabChange)="onTabChange($event)"></p-tabMenu>
       </ng-template>
-
+  
       <ng-template pTemplate="content">
-        <p-chart type="bar" [data]="chartData" [options]="chartOptions"></p-chart>
+        <div *ngIf="activeTab === 'grafico'">
+          <p-chart type="bar" [data]="chartData" [options]="chartOptions"></p-chart>
+        </div>
+        <div *ngIf="activeTab === 'dados'">
+          <h3>Dados</h3>
+          <p>Montante: {{ montante | currency:'BRL' }}</p>
+        </div>
       </ng-template>
     </p-card>
   </div>
