@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { SimulacaoPanelComponent } from "../shared/panels/simulacao-panel/simulacao-panel.component";
 import { Poupanca } from '../models/poupanca.model';
 import { Investimento } from '../interfaces/investimento';
+import { LcaLci } from '../models/lcaLci.model';
+import { CDB } from '../models/cdb.model';
 
 
 @Component({
@@ -26,8 +28,11 @@ export class SimulacaoComponent implements OnInit {
   chartData: any;
   chartOptions: any;
   activePanels : number[]= [1]
-  percentual: number = 25;
+  percentual: number = 0;
+
   poupanca?: Investimento; 
+  lca_lci?: Investimento;
+  cdb?: Investimento;
 
   periodoOptions = [
     { label: 'Meses', value: 'mes' },
@@ -38,12 +43,12 @@ export class SimulacaoComponent implements OnInit {
     {label: "Pós-fixado", value:'pos'},
   ]
 
-  activeTab: string = 'grafico';
+  activeTab: string = 'dados';
   montante: number = 10000; // Exemplo de valor
 
   tabs = [
-    { label: 'Gráfico', icon: 'pi pi-chart-bar', command: () => this.activeTab = 'grafico' },
-    { label: 'Dados', icon: 'pi pi-table', command: () => this.activeTab = 'dados' }
+    { label: 'Dados', icon: 'pi pi-table', command: () => this.activeTab = 'dados' },
+    { label: 'Gráfico', icon: 'pi pi-chart-bar', command: () => this.activeTab = 'grafico' }
   ];
 
 
@@ -84,7 +89,8 @@ export class SimulacaoComponent implements OnInit {
     this.aplicarTransformacaoNasTaxas(['taxaDI', 'taxaLC', 'taxaCDB']);
     this.simulacaoForm.valueChanges.subscribe(() => {
       this.poupanca = new Poupanca(this.simulacaoForm);
-      
+      this.lca_lci = new LcaLci(this.simulacaoForm);
+      this.cdb = new CDB(this.simulacaoForm);
     });
   
   }
@@ -100,7 +106,7 @@ export class SimulacaoComponent implements OnInit {
     });
   }
 
-  calcularMontante2() {
+  calcularMontanteGrafico() {
     const valorInicial = this.simulacaoForm.value.valorInicial;
     const aporteMensal = this.simulacaoForm.value.aporteMensal;
     const taxaJuros = this.simulacaoForm.value.taxaJuros / 100;
@@ -129,33 +135,12 @@ export class SimulacaoComponent implements OnInit {
     };
   }
 
-  // Dados 
-  calcularValorTotalInvestido() : number {
-    return this.simulacaoForm.value.valorInicial  + this.simulacaoForm.value.aporteMensal * this.simulacaoForm.value.tempo;
-  }
-
-  calcularRendimentoBruto(montante: number, valorTotalInvestido: number) : number {
-
-    return montante - valorTotalInvestido;
-  }
-
-  calcularImpostoRenda(valorRendimentoBruto : number , taxaIR: number) : number{
-    return valorRendimentoBruto * taxaIR/100;
-  }
-
-  calcularRendimentoLiquido(valorTotalInvestido:number ,valorImpostoRenda:number ) : number {
-    return valorTotalInvestido - valorImpostoRenda
-  }
-
-  calcularValorTotalLiquido(valorTotalInvestido: number , valorRendimentoBruto : number) : number {
-    return valorTotalInvestido + valorRendimentoBruto
-  }
-
-  calcularPorcentagemRendimento(valorTotalLiquido: number, valorTotalInvestido:number) : number {
-    return valorTotalLiquido/valorTotalInvestido
-  }
-
   // Botoes
+
+  resetarTaxa(campo: string): void {
+    this.simulacaoForm.get(campo)?.setValue(0.0); 
+  }
+
   limpar(){
     console.log(this.simulacaoForm.value)
     this.simulacaoForm.reset();

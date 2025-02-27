@@ -4,11 +4,13 @@ export interface Investimento {
 
     form: FormGroup;
     
-    nome: string;
+    titulo: string;
     montante: number;
     valorTotalInvestido: number;
     rendimentoBruto: number;
     rendimentoLiquido: number;
     valorTotalLiquido: number;
     porcentagem: number;
+    taxaImpostoRenda?: number;
+    valorImpostoRenda?: number;
   }

@@ -34,7 +34,8 @@ export class formulasJurosUtils{
         aporteMensal: number, 
         taxaDI: number, 
         taxaCDB : number,
-        meses: number) : number{
+        meses: number,
+        fixadoCDB: string) : number {
         var taxaIR : number
         if (meses < 6){
             taxaIR = 22.5
@@ -49,16 +50,25 @@ export class formulasJurosUtils{
             taxaIR = 15.0
         }
 
-        return this.calcularJurosCompostosAporteMensal(capitalInicial, aporteMensal, taxaDI*this.convertToPercentage(taxaCDB), meses) * (1 - this.convertToPercentage(taxaIR))
+        return this.calcularJurosCompostosAporteMensal(capitalInicial, aporteMensal, taxaDI*taxaCDB, meses) * (1 - this.convertToPercentage(taxaIR))
     }
 
     public static calcularLCA_LCI(capitalInicial: number, 
         aporteMensal: number, 
         taxaDI: number,
         taxaLC : number, 
-        meses: number
+        meses: number,
+        fixadoLC : string
     ) : number {
-        return this.calcularJurosCompostosAporteMensal(capitalInicial, aporteMensal, taxaDI*this.convertToPercentage(taxaLC), meses)
+
+        var taxa : number = 0;
+        if (fixadoLC == 'pos'){
+            taxa = taxaLC*taxaDI/100
+        }
+        else{
+            taxa = taxaLC
+        }
+        return this.calcularJurosCompostosAporteMensal(capitalInicial, aporteMensal, taxa, meses)
     }
 
 

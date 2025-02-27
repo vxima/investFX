@@ -1,10 +1,13 @@
 <p-accordion-panel>
     <p-accordion-header>{{ titulo }}</p-accordion-header>
     <p-accordion-content>
-      <p>Valor total investido: {{ valorInvestido.toFixed(2)}}</p> 
-      <p>Rendimento bruto: {{ rendimentoBruto.toFixed(2)}}</p>
-      <p>Rendimento liquido: {{ rendimentoLiquido.toFixed(2) }}</p>
-      <p>Valor total liquido: {{ valorLiquido.toFixed(2) }}</p>
-      <p-progressBar [value]="percentual.toFixed(2)" [showValue]="true"></p-progressBar>
+      <p>Valor total investido: {{ formatar(valorInvestido)}}</p> 
+      <p>Rendimento bruto: {{ formatar(rendimentoBruto)}}</p>
+      @if(titulo == "CDB"){
+        <p>Imposto de renda: {{ formatar(valorImpostoRenda) }}  <p-badge value="{{taxaImpostoRenda}} %" severity="danger"></p-badge></p>
+      }
+      <p>Rendimento liquido: {{ formatar(rendimentoLiquido) }}</p>
+      <p>Valor total liquido: {{ formatar(valorLiquido) }}</p>
+      <p-progressBar [value]="formatar(percentual)" [showValue]="true"></p-progressBar>
     </p-accordion-content>
   </p-accordion-panel>

@@ -70,7 +70,7 @@
                   <label for="taxaCDB">Taxa CDB</label>
                 </p-floatlabel>
                 <p-inputGroupAddon>
-                  <p-select [options]="fixadoOptions" formControlName="fixadoCDB"></p-select>
+                  <p-select [options]="fixadoOptions" formControlName="fixadoCDB" (onChange)="resetarTaxa('taxaCDB')"></p-select>
                 </p-inputGroupAddon>
               </p-inputgroup>
 
@@ -84,7 +84,7 @@
                   <label for="taxaLC">Taxa LCA/LCI</label>
                 </p-floatlabel>
                 <p-inputGroupAddon>
-                  <p-select [options]="fixadoOptions" formControlName="fixadoLC"></p-select>
+                  <p-select [options]="fixadoOptions" formControlName="fixadoLC" (onChange)="resetarTaxa('taxaLC')"></p-select>
                 </p-inputGroupAddon>
               </p-inputgroup>
             </div>
@@ -94,7 +94,7 @@
 
       <ng-template pTemplate="footer">
         <div class="button-group">
-          <p-button on label="Calcular" (click)="calcularMontante2()" [disabled]="simulacaoForm.invalid"></p-button>
+          <p-button on label="Calcular" (click)="calcularMontanteGrafico()" [disabled]="simulacaoForm.invalid"></p-button>
           <p-button label="Limpar" (click)="limpar()"></p-button>
         </div>
       </ng-template>
@@ -109,13 +109,11 @@
       </ng-template>
   
       <ng-template pTemplate="content">
-        <div *ngIf="activeTab === 'grafico'">
-          <p-chart type="bar" [data]="chartData" [options]="chartOptions"></p-chart>
-        </div>
+        
         <div *ngIf="activeTab === 'dados'">
           <p-accordion [activeIndex]="activePanels" [multiple]="true">
             <app-simulacao-panel  
-              [titulo]="'Poupança'"
+              [titulo]="poupanca?.titulo!"
               [percentual]="poupanca?.porcentagem || 0"
               [valorInvestido]="poupanca?.valorTotalInvestido || 0"
               [rendimentoBruto]="poupanca?.rendimentoBruto || 0"
@@ -124,27 +122,32 @@
             </app-simulacao-panel>
             @if (simulacaoForm.get('taxaCDB')?.value){
               <app-simulacao-panel  
-                [titulo]="'CDB'"
-                [percentual]="percentual"
-                [valorInvestido]="2"
-                [rendimentoBruto]="2"
-                [rendimentoLiquido]="2"
-                [valorLiquido]="2">
+                [titulo]="cdb?.titulo!"
+                [percentual]="cdb?.porcentagem || 0"
+                [valorInvestido]="cdb?.valorTotalInvestido || 0"
+                [rendimentoBruto]="cdb?.rendimentoBruto || 0"
+                [taxaImpostoRenda]="cdb?.taxaImpostoRenda || 0"
+                [valorImpostoRenda]="cdb?.valorImpostoRenda || 0"
+                [rendimentoLiquido]="cdb?.rendimentoLiquido || 0"
+                [valorLiquido]="cdb?.valorTotalLiquido || 0">
             </app-simulacao-panel>
             }
 
             @if (simulacaoForm.get('taxaLC')?.value){
               <app-simulacao-panel  
-                [titulo]="'LCA / LCI'"
-                [percentual]="percentual"
-                [valorInvestido]="2"
-                [rendimentoBruto]="2"
-                [rendimentoLiquido]="2"
-                [valorLiquido]="2">
+                [titulo]="lca_lci?.titulo!"
+                [percentual]="lca_lci?.porcentagem || 0"
+                [valorInvestido]="lca_lci?.valorTotalInvestido || 0"
+                [rendimentoBruto]="lca_lci?.rendimentoBruto || 0"
+                [rendimentoLiquido]="lca_lci?.rendimentoLiquido || 0"
+                [valorLiquido]="lca_lci?.valorTotalLiquido || 0">
             </app-simulacao-panel>
             }
-          </p-accordion>
-          
+          </p-accordion> 
+        </div>
+
+        <div *ngIf="activeTab === 'grafico'">
+          <p-chart type="bar" [data]="chartData" [options]="chartOptions"></p-chart>
         </div>
       </ng-template>
     </p-card>

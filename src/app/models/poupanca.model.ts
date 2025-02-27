@@ -3,7 +3,7 @@ import { Investimento } from "../interfaces/investimento";
 import { formulasJurosUtils} from "../shared/utils/formulas-juros-utils"
  
 export class Poupanca implements Investimento {
-    nome = 'Poupança';
+    titulo = 'Poupança';
   
     constructor(public form: FormGroup) {}
   

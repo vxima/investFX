@@ -27,7 +27,9 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { TabsModule } from 'primeng/tabs';
 import { TabMenuModule } from 'primeng/tabmenu'; 
 import { ProgressBarModule } from 'primeng/progressbar';
-
+import { ChipModule } from 'primeng/chip';
+import { BadgeModule } from 'primeng/badge';
+import { OverlayBadgeModule } from 'primeng/overlaybadge';
 
 @NgModule({
   declarations: [],
@@ -60,6 +62,9 @@ import { ProgressBarModule } from 'primeng/progressbar';
     TabsModule,
     TabMenuModule,
     ProgressBarModule,
+    ChipModule,
+    BadgeModule,
+    OverlayBadgeModule,
   ],
   exports: [
     ButtonModule,
@@ -89,6 +94,9 @@ import { ProgressBarModule } from 'primeng/progressbar';
     TabsModule,
     TabMenuModule,
     ProgressBarModule,
+    ChipModule,
+    BadgeModule,
+    OverlayBadgeModule,
   ]
 })
 export class PrimengModule { }
