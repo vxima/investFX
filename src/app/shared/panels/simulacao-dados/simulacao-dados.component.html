@@ -1,0 +1,31 @@
+<app-simulacao-panel  
+    [titulo]="poupanca?.titulo!"
+    [percentual]="poupanca?.porcentagem || 0"
+    [valorInvestido]="poupanca?.valorTotalInvestido || 0"
+    [rendimentoBruto]="poupanca?.rendimentoBruto || 0"
+    [rendimentoLiquido]="poupanca?.rendimentoLiquido || 0"
+    [valorLiquido]="poupanca?.valorTotalLiquido || 0">
+</app-simulacao-panel>
+@if (simulacaoForm?.get('taxaCDB')?.value){
+    <app-simulacao-panel  
+    [titulo]="cdb?.titulo!"
+    [percentual]="cdb?.porcentagem || 0"
+    [valorInvestido]="cdb?.valorTotalInvestido || 0"
+    [rendimentoBruto]="cdb?.rendimentoBruto || 0"
+    [taxaImpostoRenda]="cdb?.taxaImpostoRenda || 0"
+    [valorImpostoRenda]="cdb?.valorImpostoRenda || 0"
+    [rendimentoLiquido]="cdb?.rendimentoLiquido || 0"
+    [valorLiquido]="cdb?.valorTotalLiquido || 0">
+</app-simulacao-panel>
+}
+
+@if (simulacaoForm?.get('taxaLC')?.value){
+    <app-simulacao-panel  
+    [titulo]="lca_lci?.titulo!"
+    [percentual]="lca_lci?.porcentagem || 0"
+    [valorInvestido]="lca_lci?.valorTotalInvestido || 0"
+    [rendimentoBruto]="lca_lci?.rendimentoBruto || 0"
+    [rendimentoLiquido]="lca_lci?.rendimentoLiquido || 0"
+    [valorLiquido]="lca_lci?.valorTotalLiquido || 0">
+</app-simulacao-panel>
+}

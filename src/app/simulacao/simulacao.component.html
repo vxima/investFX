@@ -3,7 +3,7 @@
   <div class="col-6">
     <p-card class="card-container">
       <ng-template pTemplate="header">
-        <h3>Simulação - Renda Fixa</h3>
+        <h3>Simulação - Renda Fixa</h3> <p-button label="Limpar" icon="pi pi-refresh" (click)="limpar()" class="clean-button"></p-button>
       </ng-template>
 
       <ng-template pTemplate="content">
@@ -91,13 +91,6 @@
           </div>
         </form>
       </ng-template>
-
-      <ng-template pTemplate="footer">
-        <div class="button-group">
-          <p-button on label="Calcular" (click)="calcularMontanteGrafico()" [disabled]="simulacaoForm.invalid"></p-button>
-          <p-button label="Limpar" (click)="limpar()"></p-button>
-        </div>
-      </ng-template>
     </p-card>
   </div>
 
@@ -112,37 +105,12 @@
         
         <div *ngIf="activeTab === 'dados'">
           <p-accordion [activeIndex]="activePanels" [multiple]="true">
-            <app-simulacao-panel  
-              [titulo]="poupanca?.titulo!"
-              [percentual]="poupanca?.porcentagem || 0"
-              [valorInvestido]="poupanca?.valorTotalInvestido || 0"
-              [rendimentoBruto]="poupanca?.rendimentoBruto || 0"
-              [rendimentoLiquido]="poupanca?.rendimentoLiquido || 0"
-              [valorLiquido]="poupanca?.valorTotalLiquido || 0">
-            </app-simulacao-panel>
-            @if (simulacaoForm.get('taxaCDB')?.value){
-              <app-simulacao-panel  
-                [titulo]="cdb?.titulo!"
-                [percentual]="cdb?.porcentagem || 0"
-                [valorInvestido]="cdb?.valorTotalInvestido || 0"
-                [rendimentoBruto]="cdb?.rendimentoBruto || 0"
-                [taxaImpostoRenda]="cdb?.taxaImpostoRenda || 0"
-                [valorImpostoRenda]="cdb?.valorImpostoRenda || 0"
-                [rendimentoLiquido]="cdb?.rendimentoLiquido || 0"
-                [valorLiquido]="cdb?.valorTotalLiquido || 0">
-            </app-simulacao-panel>
-            }
-
-            @if (simulacaoForm.get('taxaLC')?.value){
-              <app-simulacao-panel  
-                [titulo]="lca_lci?.titulo!"
-                [percentual]="lca_lci?.porcentagem || 0"
-                [valorInvestido]="lca_lci?.valorTotalInvestido || 0"
-                [rendimentoBruto]="lca_lci?.rendimentoBruto || 0"
-                [rendimentoLiquido]="lca_lci?.rendimentoLiquido || 0"
-                [valorLiquido]="lca_lci?.valorTotalLiquido || 0">
-            </app-simulacao-panel>
-            }
+            <app-simulacao-dados
+              [poupanca]="poupanca"
+              [cdb]="cdb"
+              [lca_lci]="lca_lci"
+              [simulacaoForm]="simulacaoForm"
+            ></app-simulacao-dados>
           </p-accordion> 
         </div>
 

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { formulasJurosUtils } from '../shared/utils/formulas-juros-utils';
 import { MaterialModule } from '../shared/modules/material.module';
 import { PrimengModule } from '../shared/modules/primeng.module';
 import { CommonModule } from '@angular/common';
-import { SimulacaoPanelComponent } from "../shared/panels/simulacao-panel/simulacao-panel.component";
 import { Poupanca } from '../models/poupanca.model';
 import { Investimento } from '../interfaces/investimento';
 import { LcaLci } from '../models/lcaLci.model';
 import { CDB } from '../models/cdb.model';
+import { SimulacaoDadosComponent } from '../shared/panels/simulacao-dados/simulacao-dados.component';
+import { SimulacaoGraficoComponent } from '../shared/panels/simulacao-grafico/simulacao-grafico.component';
 
 
 @Component({
@@ -17,18 +17,17 @@ import { CDB } from '../models/cdb.model';
     ReactiveFormsModule,
     MaterialModule,
     PrimengModule, 
-    SimulacaoPanelComponent],
+    SimulacaoDadosComponent,
+    SimulacaoGraficoComponent],
   templateUrl: './simulacao.component.html',
   styleUrl: './simulacao.component.scss',
   standalone: true
 })
 export class SimulacaoComponent implements OnInit {
   simulacaoForm!: FormGroup;
-  resultado: number = 0;
   chartData: any;
   chartOptions: any;
-  activePanels : number[]= [1]
-  percentual: number = 0;
+  activePanels : number[]= [0,1,2]
 
   poupanca?: Investimento; 
   lca_lci?: Investimento;
@@ -44,7 +43,6 @@ export class SimulacaoComponent implements OnInit {
   ]
 
   activeTab: string = 'dados';
-  montante: number = 10000; // Exemplo de valor
 
   tabs = [
     { label: 'Dados', icon: 'pi pi-table', command: () => this.activeTab = 'dados' },
