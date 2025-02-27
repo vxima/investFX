@@ -5,12 +5,14 @@ export class formulasJurosUtils{
 
     public static calcularJurosCompostosAporteMensal(capitalInicial: number, 
         aporteMensal: number, 
-        taxaJurosMensal: number, 
+        taxaJurosAnual: number, 
         meses: number
     ) : number {
+        const taxaJurosMensal = this.convertJuroAnualToMensal(taxaJurosAnual);
+
         return (
-            capitalInicial * Math.pow(1 + this.convertToPercentage(taxaJurosMensal), meses/12) +
-            (aporteMensal * (Math.pow(1 + this.convertToPercentage(taxaJurosMensal), meses/12) - 1)) / this.convertToPercentage(taxaJurosMensal)
+            capitalInicial * Math.pow(1 + taxaJurosMensal, meses) +
+            (aporteMensal * (Math.pow(1 + taxaJurosMensal, meses) - 1)) / taxaJurosMensal
         );
     }
 
@@ -56,7 +58,6 @@ export class formulasJurosUtils{
         taxaLC : number, 
         meses: number
     ) : number {
-
         return this.calcularJurosCompostosAporteMensal(capitalInicial, aporteMensal, taxaDI*this.convertToPercentage(taxaLC), meses)
     }
 
@@ -64,5 +65,9 @@ export class formulasJurosUtils{
     // Auxiliares
     public static convertToPercentage(value:number) : number{
         return value/100.00;
+    }
+
+    public static convertJuroAnualToMensal(taxaAnual: number) : number {
+        return Math.pow(1+ this.convertToPercentage(taxaAnual) , (1/12)) - 1;
     }
 }

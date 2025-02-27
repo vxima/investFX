@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PrimengModule } from '../../../modules/primeng.module';
+import { PrimengModule } from '../../modules/primeng.module';
 
 @Component({
   selector: 'app-simulacao-panel',

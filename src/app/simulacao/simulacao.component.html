@@ -116,11 +116,11 @@
           <p-accordion [activeIndex]="activePanels" [multiple]="true">
             <app-simulacao-panel  
               [titulo]="'Poupança'"
-              [percentual]="percentual"
-              [valorInvestido]="2"
-              [rendimentoBruto]="2"
-              [rendimentoLiquido]="2"
-              [valorLiquido]="2">>
+              [percentual]="poupanca?.porcentagem || 0"
+              [valorInvestido]="poupanca?.valorTotalInvestido || 0"
+              [rendimentoBruto]="poupanca?.rendimentoBruto || 0"
+              [rendimentoLiquido]="poupanca?.rendimentoLiquido || 0"
+              [valorLiquido]="poupanca?.valorTotalLiquido || 0">
             </app-simulacao-panel>
             @if (simulacaoForm.get('taxaCDB')?.value){
               <app-simulacao-panel  
@@ -129,7 +129,7 @@
                 [valorInvestido]="2"
                 [rendimentoBruto]="2"
                 [rendimentoLiquido]="2"
-                [valorLiquido]="2">>
+                [valorLiquido]="2">
             </app-simulacao-panel>
             }
 
@@ -140,7 +140,7 @@
                 [valorInvestido]="2"
                 [rendimentoBruto]="2"
                 [rendimentoLiquido]="2"
-                [valorLiquido]="2">>
+                [valorLiquido]="2">
             </app-simulacao-panel>
             }
           </p-accordion>

@@ -4,8 +4,10 @@ import { formulasJurosUtils } from '../shared/utils/formulas-juros-utils';
 import { MaterialModule } from '../shared/modules/material.module';
 import { PrimengModule } from '../shared/modules/primeng.module';
 import { CommonModule } from '@angular/common';
-import { SimulacaoPanelComponent } from "../shared/panels/simulacaoPanel/simulacao-panel/simulacao-panel.component";
-import { convertToParamMap } from '@angular/router';
+import { SimulacaoPanelComponent } from "../shared/panels/simulacao-panel/simulacao-panel.component";
+import { Poupanca } from '../models/poupanca.model';
+import { Investimento } from '../interfaces/investimento';
+
 
 @Component({
   selector: 'app-simulacao',
@@ -25,6 +27,8 @@ export class SimulacaoComponent implements OnInit {
   chartOptions: any;
   activePanels : number[]= [1]
   percentual: number = 25;
+  poupanca?: Investimento; 
+
   periodoOptions = [
     { label: 'Meses', value: 'mes' },
     { label: 'Anos', value: 'ano' }
@@ -78,6 +82,11 @@ export class SimulacaoComponent implements OnInit {
     });
 
     this.aplicarTransformacaoNasTaxas(['taxaDI', 'taxaLC', 'taxaCDB']);
+    this.simulacaoForm.valueChanges.subscribe(() => {
+      this.poupanca = new Poupanca(this.simulacaoForm);
+      
+    });
+  
   }
 
   private aplicarTransformacaoNasTaxas(campos: string[]) {
@@ -90,18 +99,14 @@ export class SimulacaoComponent implements OnInit {
       });
     });
   }
-  calcularMontante(){
-    const formValues = this.simulacaoForm.value; 
-    this.resultado = formulasJurosUtils.calcularJurosCompostosAporteMensal(formValues.valorInicial, formValues.aporteMensal, formValues.taxaJuros, formValues.tempo)
-  }
 
   calcularMontante2() {
     const valorInicial = this.simulacaoForm.value.valorInicial;
     const aporteMensal = this.simulacaoForm.value.aporteMensal;
     const taxaJuros = this.simulacaoForm.value.taxaJuros / 100;
-    const tempo = this.simulacaoForm.value.tempo;
+    var tempo = this.simulacaoForm.value.tempo;
     if(this.simulacaoForm.value.periodo == 'ano'){
-      const tempo = 12 * this.simulacaoForm.value.tempo;
+      tempo = 12 * this.simulacaoForm.value.tempo;
     }
     
     let montante = valorInicial;
@@ -157,6 +162,6 @@ export class SimulacaoComponent implements OnInit {
     this.chartData = null;
   }
 
-  
+
   
 }
