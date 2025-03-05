@@ -30,11 +30,6 @@ label {
   margin-bottom: 5px;
 }
 
-.required {
-  color: red;
-  font-weight: bold;
-  margin-left: 5px;
-}
 
 .button-group {
   display: flex;
@@ -52,7 +47,21 @@ p-button {
   font-weight: bold;
 }
 
+.header-content {
+  display: flex;
+  justify-content: space-between;  /* Espaço entre o título e o botão */
+  align-items: center;             /* Alinha os itens verticalmente no centro */
+  padding-right: 10px;        /* Alinha verticalmente os itens no centro */
+}
+
 .clean-button {
-  margin-left: auto; /* Move o botão para o canto direito */
+  margin-left: auto; /* Empurra o botão para a direita */
+  padding: 0 10px;
+}
+
+.custom-addon {
+  width: 100%; /* Faz o addon ocupar todo o espaço disponível */
+  display: flex;
+  justify-content: center; /* Alinha o conteúdo do addon ao centro, se necessário */
 }
 

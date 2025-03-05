@@ -3,7 +3,9 @@
   <div class="col-6">
     <p-card class="card-container">
       <ng-template pTemplate="header">
-        <h3>Simulação - Renda Fixa</h3> <p-button label="Limpar" icon="pi pi-refresh" (click)="limpar()" class="clean-button"></p-button>
+        <div class="header-content">
+          <h3>Simulação - Renda Fixa</h3> <p-button label="Limpar" icon="pi pi-refresh" (click)="limpar()" class="clean-button"></p-button>
+        </div>
       </ng-template>
 
       <ng-template pTemplate="content">
@@ -42,7 +44,7 @@
                  <label for="tempo">Tempo</label>
                 </p-floatlabel>
                 <p-inputGroupAddon>
-                  <p-select [options]="periodoOptions" formControlName="periodo"></p-select>
+                  <p-select [options]="periodoOptions" formControlName="periodo" class="custom-addon"></p-select>
                 </p-inputGroupAddon>
               </p-inputGroup>
 
@@ -115,7 +117,10 @@
         </div>
 
         <div *ngIf="activeTab === 'grafico'">
-          <p-chart type="bar" [data]="chartData" [options]="chartOptions"></p-chart>
+          <app-simulacao-grafico
+              [chartData]="chartData"
+              [chartOptions]="chartOptions"
+          ></app-simulacao-grafico>
         </div>
       </ng-template>
     </p-card>
