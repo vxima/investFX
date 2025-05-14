@@ -1,11 +1,12 @@
 <p-menubar [model]="menuItems">
   <ng-template pTemplate="start">
-    <span class="text-xl font-bold">InvestFX</span>
+    <span class="text-xl font-bold" (click)="simulacao()" style="cursor: pointer;"
+    > InvestFX</span>
   </ng-template>
 
   <ng-template pTemplate="end">
-    <button pButton label="Contato" icon="pi pi-envelope" class="p-button-text p-mr-2"></button>
-    <button pButton label="Sobre" icon="pi pi-info-circle" class="p-button-text"></button>
+    <p-button label="Contato" icon="pi pi-envelope" class="p-button-text p-mr-2" (click)="contato()"></p-button>
+    <p-button label="Sobre" icon="pi pi-info-circle" class="p-button-text" (click)="sobre()"></p-button>
   </ng-template>
 </p-menubar>
 
