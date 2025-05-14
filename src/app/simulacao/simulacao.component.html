@@ -1,4 +1,8 @@
 <div class="container grid">
+
+  <!-- Navigation Bar -->
+  <!-- <p-menubar  /> -->
+
   <!-- Formulário (Esquerda) -->
   <div class="col-6">
     <p-card class="card-container">
@@ -118,8 +122,10 @@
 
         <div *ngIf="activeTab === 'grafico'">
           <app-simulacao-grafico
-              [chartData]="chartData"
-              [chartOptions]="chartOptions"
+            [labels]="labels"
+            [poupanca]="poupanca"
+            [cdb]="cdb"
+            [lca_lci]="lca_lci"
           ></app-simulacao-grafico>
         </div>
       </ng-template>

@@ -48,6 +48,7 @@ export class SimulacaoComponent implements OnInit {
     { label: 'Dados', icon: 'pi pi-table', command: () => this.activeTab = 'dados' },
     { label: 'Gráfico', icon: 'pi pi-chart-bar', command: () => this.activeTab = 'grafico' }
   ];
+  labels: string[] = ["1" , "2" , "3"];
 
 
   onTabChange(event: any) {

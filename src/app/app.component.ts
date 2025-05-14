@@ -10,4 +10,5 @@ import { PrimengModule } from './shared/modules/primeng.module';
 })
 export class AppComponent {
   title = 'investFX';
+  menuItems: [] | undefined;  
 }

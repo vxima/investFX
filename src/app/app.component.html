@@ -1,9 +1,14 @@
-<p-toolbar>
-    <div class="p-toolbar-group-left">
-      <span class="title">InvestFX</span>
-    </div>
-  </p-toolbar>
-  
-  <div class="content">
-    <router-outlet></router-outlet>
-  </div>
+<p-menubar [model]="menuItems">
+  <ng-template pTemplate="start">
+    <span class="text-xl font-bold">InvestFX</span>
+  </ng-template>
+
+  <ng-template pTemplate="end">
+    <button pButton label="Contato" icon="pi pi-envelope" class="p-button-text p-mr-2"></button>
+    <button pButton label="Sobre" icon="pi pi-info-circle" class="p-button-text"></button>
+  </ng-template>
+</p-menubar>
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
