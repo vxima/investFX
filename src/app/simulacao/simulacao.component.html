@@ -1,14 +1,13 @@
 <div class="container grid">
 
-  <!-- Navigation Bar -->
-  <!-- <p-menubar  /> -->
 
   <!-- Formulário (Esquerda) -->
   <div class="col-6">
     <p-card class="card-container">
       <ng-template pTemplate="header">
-        <div class="header-content">
-          <h3>Simulação - Renda Fixa</h3> <p-button label="Limpar" icon="pi pi-refresh" (click)="limpar()" class="clean-button"></p-button>
+        <div class="header-content" style="display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 1rem;">
+          <h3 class="header-title" style="margin: 0;">Simulação - Renda Fixa</h3>
+          <p-button icon="pi pi-refresh" label="Limpar" class="clean-button" (click)="limpar()"></p-button>
         </div>
       </ng-template>
 
@@ -27,7 +26,7 @@
                   <label for="valorInicial">Valor inicial</label>
                 </p-floatlabel>
               </p-inputgroup>
-                
+
               <p-inputgroup>
                 <p-inputGroupAddon>
                   <i class="pi pi-dollar"></i>
@@ -39,7 +38,7 @@
                 </p-floatlabel>
               </p-inputgroup>
 
-              <p-inputGroup>
+              <p-inputgroup>
                 <p-inputGroupAddon>
                   <i class="pi pi-calendar"></i>
                 </p-inputGroupAddon>
@@ -50,7 +49,7 @@
                 <p-inputGroupAddon>
                   <p-select [options]="periodoOptions" formControlName="periodo" class="custom-addon"></p-select>
                 </p-inputGroupAddon>
-              </p-inputGroup>
+              </p-inputgroup>
 
               <p-inputgroup>
                 <p-inputGroupAddon>
@@ -104,11 +103,11 @@
   <div class="col-6">
     <p-card class="card-container">
       <ng-template pTemplate="header">
-        <p-tabMenu [model]="tabs" (onTabChange)="onTabChange($event)"></p-tabMenu>
+        <p-tabMenu [model]="tabs"></p-tabMenu>
       </ng-template>
-  
+
       <ng-template pTemplate="content">
-        
+
         <div *ngIf="activeTab === 'dados'">
           <p-accordion [activeIndex]="activePanels" [multiple]="true">
             <app-simulacao-dados
@@ -117,7 +116,7 @@
               [lca_lci]="lca_lci"
               [simulacaoForm]="simulacaoForm"
             ></app-simulacao-dados>
-          </p-accordion> 
+          </p-accordion>
         </div>
 
         <div *ngIf="activeTab === 'grafico'">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {  FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MaterialModule } from '../shared/modules/material.module';
 import { PrimengModule } from '../shared/modules/primeng.module';
 import { CommonModule } from '@angular/common';
@@ -9,6 +9,7 @@ import { LcaLci } from '../models/lcaLci.model';
 import { CDB } from '../models/cdb.model';
 import { SimulacaoDadosComponent } from '../shared/panels/simulacao-dados/simulacao-dados.component';
 import { SimulacaoGraficoComponent } from '../shared/panels/simulacao-grafico/simulacao-grafico.component';
+import {MenuItem} from 'primeng/api';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { SimulacaoGraficoComponent } from '../shared/panels/simulacao-grafico/si
   imports: [CommonModule,
     ReactiveFormsModule,
     MaterialModule,
-    PrimengModule, 
+    PrimengModule,
     SimulacaoDadosComponent,
     SimulacaoGraficoComponent],
   templateUrl: './simulacao.component.html',
@@ -29,7 +30,7 @@ export class SimulacaoComponent implements OnInit {
   chartOptions: any;
   activePanels : number[]= [0,1,2]
 
-  poupanca?: Investimento; 
+  poupanca?: Investimento;
   lca_lci?: Investimento;
   cdb?: Investimento;
 
@@ -49,7 +50,7 @@ export class SimulacaoComponent implements OnInit {
     { label: 'Gráfico', icon: 'pi pi-chart-bar', command: () => this.activeTab = 'grafico' }
   ];
   labels: string[] = ["1" , "2" , "3"];
-
+  itemsHeader: MenuItem[] | undefined;
 
   onTabChange(event: any) {
     this.activeTab = event.item.label.toLowerCase();
@@ -74,16 +75,23 @@ export class SimulacaoComponent implements OnInit {
     // Inicializa o formulário
     this.simulacaoForm = this.fb.group({
       valorInicial: [0.0 , [Validators.required]],
-      aporteMensal: [0.0], 
+      aporteMensal: [0.0],
       taxaDI: [0.0, [Validators.required]],
       taxaLC: [0.0, ],
       taxaCDB: [0.0,],
       tempo: [0, [Validators.required]],
       periodo: ['mes', [Validators.required]],
       fixadoCDB: ['pos'],
-      fixadoLC: ['pos'] 
+      fixadoLC: ['pos']
 
     });
+
+    this.itemsHeader = [
+      { label: 'Simulação',
+        icon: 'pi pi-home'},
+      { label: 'Limpar',
+        icon: 'pi pi-refresh'}
+    ];
 
     this.aplicarTransformacaoNasTaxas(['taxaDI', 'taxaLC', 'taxaCDB']);
     this.simulacaoForm.valueChanges.subscribe(() => {
@@ -91,7 +99,7 @@ export class SimulacaoComponent implements OnInit {
       this.lca_lci = new LcaLci(this.simulacaoForm);
       this.cdb = new CDB(this.simulacaoForm);
     });
-  
+
   }
 
   private aplicarTransformacaoNasTaxas(campos: string[]) {
@@ -113,7 +121,7 @@ export class SimulacaoComponent implements OnInit {
     if(this.simulacaoForm.value.periodo == 'ano'){
       tempo = 12 * this.simulacaoForm.value.tempo;
     }
-    
+
     let montante = valorInicial;
     const valores = [valorInicial];
 
@@ -137,7 +145,7 @@ export class SimulacaoComponent implements OnInit {
   // Botoes
 
   resetarTaxa(campo: string): void {
-    this.simulacaoForm.get(campo)?.setValue(0.0); 
+    this.simulacaoForm.get(campo)?.setValue(0.0);
   }
 
   limpar(){
@@ -147,5 +155,5 @@ export class SimulacaoComponent implements OnInit {
   }
 
 
-  
+
 }

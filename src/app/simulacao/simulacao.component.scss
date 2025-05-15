@@ -36,10 +36,6 @@ label {
   justify-content: space-between;
 }
 
-p-button {
-  width: 48%;
-}
-
 .output {
   margin-top: 20px;
   text-align: center;
@@ -49,14 +45,29 @@ p-button {
 
 .header-content {
   display: flex;
-  justify-content: space-between;  /* Espaço entre o título e o botão */
-  align-items: center;             /* Alinha os itens verticalmente no centro */
-  padding-right: 10px;        /* Alinha verticalmente os itens no centro */
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 0.8rem;
+  margin-bottom: 1rem;
+  gap: 1rem;
 }
 
-.clean-button {
-  margin-left: auto; /* Empurra o botão para a direita */
-  padding: 0 10px;
+.header-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.clean-button ::ng-deep .p-button {
+  width: fit-content !important;
+  min-width: unset !important;
+  max-width: unset !important;
+  display: inline-flex !important;
+  padding: 0.35rem 0.7rem;
+  box-sizing: border-box;
+
 }
 
 .custom-addon {
