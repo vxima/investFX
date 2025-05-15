@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
+import {NgOptimizedImage} from '@angular/common';
+
 
 @Component({
   selector: 'app-contato',
-  imports: [],
+  imports: [
+    NgOptimizedImage
+  ],
+  standalone: true,
   templateUrl: './contato.component.html',
   styleUrl: './contato.component.scss'
 })
