@@ -62,8 +62,6 @@ label {
 
 .clean-button ::ng-deep .p-button {
   width: fit-content !important;
-  min-width: unset !important;
-  max-width: unset !important;
   display: inline-flex !important;
   padding: 0.35rem 0.7rem;
   box-sizing: border-box;
@@ -71,8 +69,11 @@ label {
 }
 
 .custom-addon {
-  width: 100%; /* Faz o addon ocupar todo o espaço disponível */
+  min-width: 110px;
+  width: 200px;
   display: flex;
-  justify-content: center; /* Alinha o conteúdo do addon ao centro, se necessário */
+  justify-content: center;
+  align-items: center;
+
 }
 

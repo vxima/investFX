@@ -57,7 +57,7 @@
                 </p-inputGroupAddon>
                 <p-floatlabel  variant="in">
                   <p-inputNumber id="taxaDI" formControlName="taxaDI"
-                    mode="decimal" min="0.0" > </p-inputNumber>
+                    mode="decimal" > </p-inputNumber>
                   <label for="taxaDI">Taxa DI</label>
                 </p-floatlabel>
                 <p-inputGroupAddon>
@@ -71,11 +71,12 @@
                 </p-inputGroupAddon>
                 <p-floatlabel  variant="in">
                   <p-inputNumber id="taxaCDB" formControlName="taxaCDB"
-                    mode="decimal" min="0.0" > </p-inputNumber>
+                    mode="decimal" > </p-inputNumber>
                   <label for="taxaCDB">Taxa CDB</label>
                 </p-floatlabel>
                 <p-inputGroupAddon>
-                  <p-select [options]="fixadoOptions" formControlName="fixadoCDB" (onChange)="resetarTaxa('taxaCDB')"></p-select>
+                  <p-select [options]="fixadoOptions" formControlName="fixadoCDB"
+                            (onChange)="resetarTaxa('taxaCDB')" class="custom-addon"></p-select>
                 </p-inputGroupAddon>
               </p-inputgroup>
 
@@ -85,11 +86,13 @@
                 </p-inputGroupAddon>
                 <p-floatlabel  variant="in">
                   <p-inputNumber id="taxaLC" formControlName="taxaLC"
-                    mode="decimal" min="0.0" > </p-inputNumber>
+                    mode="decimal" > </p-inputNumber>
                   <label for="taxaLC">Taxa LCA/LCI</label>
                 </p-floatlabel>
                 <p-inputGroupAddon>
-                  <p-select [options]="fixadoOptions" formControlName="fixadoLC" (onChange)="resetarTaxa('taxaLC')"></p-select>
+                  <p-select [options]="fixadoOptions" formControlName="fixadoLC"
+                          (onChange)="resetarTaxa('taxaLC')" class="custom-addon">
+                  </p-select>
                 </p-inputGroupAddon>
               </p-inputgroup>
             </div>

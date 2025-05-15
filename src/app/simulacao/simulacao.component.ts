@@ -81,17 +81,10 @@ export class SimulacaoComponent implements OnInit {
       taxaCDB: [0.0,],
       tempo: [0, [Validators.required]],
       periodo: ['mes', [Validators.required]],
-      fixadoCDB: ['pos'],
-      fixadoLC: ['pos']
+      fixadoCDB: ['pre'],
+      fixadoLC: ['pre']
 
     });
-
-    this.itemsHeader = [
-      { label: 'Simulação',
-        icon: 'pi pi-home'},
-      { label: 'Limpar',
-        icon: 'pi pi-refresh'}
-    ];
 
     this.aplicarTransformacaoNasTaxas(['taxaDI', 'taxaLC', 'taxaCDB']);
     this.simulacaoForm.valueChanges.subscribe(() => {
@@ -113,34 +106,6 @@ export class SimulacaoComponent implements OnInit {
     });
   }
 
-  calcularMontanteGrafico() {
-    const valorInicial = this.simulacaoForm.value.valorInicial;
-    const aporteMensal = this.simulacaoForm.value.aporteMensal;
-    const taxaJuros = this.simulacaoForm.value.taxaJuros / 100;
-    var tempo = this.simulacaoForm.value.tempo;
-    if(this.simulacaoForm.value.periodo == 'ano'){
-      tempo = 12 * this.simulacaoForm.value.tempo;
-    }
-
-    let montante = valorInicial;
-    const valores = [valorInicial];
-
-    for (let i = 1; i <= tempo; i++) {
-      montante = montante * (1 + taxaJuros) + aporteMensal;
-      valores.push(montante);
-    }
-
-    this.chartData = {
-      labels: Array.from({ length: tempo + 1 }, (_, i) => `Mês ${i}`),
-      datasets: [
-        {
-          label: 'Montante Acumulado',
-          data: valores,
-          backgroundColor: 'rgba(75, 192, 192, 0.6)'
-        }
-      ]
-    };
-  }
 
   // Botoes
 

@@ -1,25 +1,31 @@
 import { FormGroup } from "@angular/forms";
 import { Investimento } from "../interfaces/investimento";
 import { formulasJurosUtils} from "../shared/utils/formulas-juros-utils"
- 
+
 export class Poupanca implements Investimento {
     titulo = 'Poupança';
-  
-    constructor(public form: FormGroup) {}
-  
+    tempo : number = 0;
+    constructor(public form: FormGroup) {
+      if(this.form.value.periodo == 'ano'){
+        this.tempo = 12*this.form.value.tempo
+      } else{
+        this.tempo = this.form.value.tempo
+      }
+    }
+
     get montante(): number {
-        const { valorInicial, aporteMensal, taxaDI , tempo} = this.form.value;
-      return formulasJurosUtils.calcularPoupanca(valorInicial, aporteMensal, taxaDI , tempo)
+        const { valorInicial, aporteMensal, taxaDI} = this.form.value;
+      return formulasJurosUtils.calcularPoupanca(valorInicial, aporteMensal, taxaDI , this.tempo)
     }
     get valorTotalInvestido() : number {
-        const {valorInicial, aporteMensal, tempo} = this.form.value;
-        return valorInicial + aporteMensal * tempo;
+        const {valorInicial, aporteMensal} = this.form.value;
+        return valorInicial + aporteMensal * this.tempo;
     }
 
     get rendimentoBruto() : number {
         return this.montante - this.valorTotalInvestido;
     }
-    
+
     get rendimentoLiquido() : number {
         return this.rendimentoBruto;
     }
@@ -27,7 +33,7 @@ export class Poupanca implements Investimento {
     get valorTotalLiquido() : number {
         return this.montante;
     }
-  
+
     get porcentagem() : number {
         return this.valorTotalInvestido !== 0 ? (this.rendimentoLiquido / this.valorTotalInvestido) * 100 : 0;
     }
