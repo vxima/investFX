@@ -2,34 +2,34 @@
 export default {
   bootstrap: () => import('./main.server.mjs').then(m => m.default),
   inlineCriticalCss: true,
-  baseHref: 'https://vxima.github.io/investFX/',
+  baseHref: '/investFX/',
   locale: undefined,
   routes: [
   {
     "renderMode": 2,
-    "redirectTo": "/https://vxima.github.io/investFX/simulacao",
-    "route": "/https:/vxima.github.io/investFX"
+    "redirectTo": "/investFX/simulacao",
+    "route": "/investFX"
   },
   {
     "renderMode": 2,
-    "route": "/https:/vxima.github.io/investFX/simulacao"
+    "route": "/investFX/simulacao"
   },
   {
     "renderMode": 2,
-    "route": "/https:/vxima.github.io/investFX/sobre"
+    "route": "/investFX/sobre"
   },
   {
     "renderMode": 2,
-    "route": "/https:/vxima.github.io/investFX/contato"
+    "route": "/investFX/contato"
   }
 ],
   entryPointToBrowserMapping: undefined,
   assets: {
-    'index.csr.html': {size: 23803, hash: '7b1a570eb69587dcbefce0ccb0128c01643016c882db1a620fe055a45963a273', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
-    'index.server.html': {size: 17234, hash: '8cc53eac32f58c727e1c1ef3bc86169fbb6b40c6dd8b429eda339f18bb9f78e0', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
-    'https:/vxima.github.io/investFX/sobre/index.html': {size: 92796, hash: '0623d789037f6c5f483a99041488a266fe68a94de77aa582b62cecb31d25905b', text: () => import('./assets-chunks/https:_vxima_github_io_investFX_sobre_index_html.mjs').then(m => m.default)},
-    'https:/vxima.github.io/investFX/contato/index.html': {size: 92796, hash: '0623d789037f6c5f483a99041488a266fe68a94de77aa582b62cecb31d25905b', text: () => import('./assets-chunks/https:_vxima_github_io_investFX_contato_index_html.mjs').then(m => m.default)},
-    'https:/vxima.github.io/investFX/simulacao/index.html': {size: 92796, hash: '0623d789037f6c5f483a99041488a266fe68a94de77aa582b62cecb31d25905b', text: () => import('./assets-chunks/https:_vxima_github_io_investFX_simulacao_index_html.mjs').then(m => m.default)},
+    'index.csr.html': {size: 23780, hash: 'dc7fd9bb50033b1a97e64b7d96d9c17a33d9496a9b8d7661542aae872da8024b', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
+    'index.server.html': {size: 17211, hash: 'fd09ffb5e2fcd57e90b26890d80fbc54f373864e3bc591050a21b969bd89e241', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
+    'sobre/index.html': {size: 93644, hash: '4528d38869eb5c001c0417164bc3ba2d54e35647ade1bdaa305fd0bf1f723004', text: () => import('./assets-chunks/sobre_index_html.mjs').then(m => m.default)},
+    'contato/index.html': {size: 94185, hash: '65b18d6ebdcadd2fe652cdbf3a0640df0c1fa28f5b2f9ff2dc3ac7057afddc33', text: () => import('./assets-chunks/contato_index_html.mjs').then(m => m.default)},
+    'simulacao/index.html': {size: 160304, hash: '0f5a89f053ed677a681a4aa54424800e4ed47b2e3310073061fc9273f19636a6', text: () => import('./assets-chunks/simulacao_index_html.mjs').then(m => m.default)},
     'styles-E5BT4V6G.css': {size: 366581, hash: 'MyiIZR8ceFw', text: () => import('./assets-chunks/styles-E5BT4V6G_css.mjs').then(m => m.default)}
   },
 };

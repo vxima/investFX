@@ -1,6 +1,6 @@
 
 export default {
-  basePath: 'https://vxima.github.io/investFX',
+  basePath: '/investFX',
   supportedLocales: {
   "en-US": ""
 },
