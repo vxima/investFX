@@ -86,7 +86,7 @@ export class SimulacaoComponent implements OnInit {
 
     });
 
-    this.aplicarTransformacaoNasTaxas(['taxaDI', 'taxaLC', 'taxaCDB']);
+    this.aplicarReverseTyping(['valorInicial','aporteMensal','taxaDI', 'taxaLC', 'taxaCDB']);
     this.simulacaoForm.valueChanges.subscribe(() => {
       this.poupanca = new Poupanca(this.simulacaoForm);
       this.lca_lci = new LcaLci(this.simulacaoForm);
@@ -95,7 +95,7 @@ export class SimulacaoComponent implements OnInit {
 
   }
 
-  private aplicarTransformacaoNasTaxas(campos: string[]) {
+  private aplicarReverseTyping(campos: string[]) {
     campos.forEach(campo => {
       this.simulacaoForm.get(campo)?.valueChanges.subscribe(value => {
         if (value !== null && value !== undefined) {

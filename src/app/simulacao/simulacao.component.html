@@ -22,7 +22,7 @@
                 </p-inputGroupAddon>
                 <p-floatlabel  variant="in">
                   <p-inputNumber id="valorInicial" formControlName="valorInicial"
-                    mode="currency" currency="BRL" min="0.0" > </p-inputNumber>
+                                 mode="decimal" [prefix]="'R$ '" min="0.0" > </p-inputNumber>
                   <label for="valorInicial">Valor inicial</label>
                 </p-floatlabel>
               </p-inputgroup>
@@ -33,7 +33,7 @@
                 </p-inputGroupAddon>
                 <p-floatlabel  variant="in">
                   <p-inputNumber id="aporteMensal" formControlName="aporteMensal"
-                    mode="currency" currency="BRL" min="0.0" > </p-inputNumber>
+                   mode="decimal" [prefix]="'R$ '" min="0.0" > </p-inputNumber>
                   <label for="aporteMensal">Aporte mensal</label>
                 </p-floatlabel>
               </p-inputgroup>
