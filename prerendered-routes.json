@@ -1,8 +1,0 @@
-{
-  "routes": {
-    "/investFX": {},
-    "/investFX/contato": {},
-    "/investFX/simulacao": {},
-    "/investFX/sobre": {}
-  }
-}
