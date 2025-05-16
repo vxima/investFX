@@ -9,7 +9,7 @@ import { LcaLci } from '../models/lcaLci.model';
 import { CDB } from '../models/cdb.model';
 import { SimulacaoDadosComponent } from '../shared/panels/simulacao-dados/simulacao-dados.component';
 import { SimulacaoGraficoComponent } from '../shared/panels/simulacao-grafico/simulacao-grafico.component';
-import {MenuItem} from 'primeng/api';
+
 
 
 @Component({
@@ -27,7 +27,6 @@ import {MenuItem} from 'primeng/api';
 export class SimulacaoComponent implements OnInit {
   simulacaoForm!: FormGroup;
   chartData: any;
-  chartOptions: any;
   activePanels : number[]= [0,1,2]
 
   poupanca?: Investimento;
@@ -49,8 +48,7 @@ export class SimulacaoComponent implements OnInit {
     { label: 'Dados', icon: 'pi pi-table', command: () => this.activeTab = 'dados' },
     { label: 'Gráfico', icon: 'pi pi-chart-bar', command: () => this.activeTab = 'grafico' }
   ];
-  labels: string[] = ["1" , "2" , "3"];
-  itemsHeader: MenuItem[] | undefined;
+  labels: string[] = ["Poupança" , "CDB" , "LCA/LCI"];
 
   onTabChange(event: any) {
     this.activeTab = event.item.label.toLowerCase();
@@ -60,26 +58,17 @@ export class SimulacaoComponent implements OnInit {
     private readonly fb: FormBuilder
   ) {
 
-    this.chartOptions = {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top'
-        }
-      }
-    };
-
   }
 
   ngOnInit() {
     // Inicializa o formulário
     this.simulacaoForm = this.fb.group({
-      valorInicial: [0.0 , [Validators.required]],
-      aporteMensal: [0.0],
-      taxaDI: [0.0, [Validators.required]],
-      taxaLC: [0.0, ],
-      taxaCDB: [0.0,],
-      tempo: [0, [Validators.required]],
+      valorInicial: [null, [Validators.required]],
+      aporteMensal: [null],
+      taxaDI: [null, [Validators.required]],
+      taxaLC: [null ],
+      taxaCDB: [null],
+      tempo: [null, [Validators.required]],
       periodo: ['mes', [Validators.required]],
       fixadoCDB: ['pre'],
       fixadoLC: ['pre']
@@ -100,7 +89,7 @@ export class SimulacaoComponent implements OnInit {
       this.simulacaoForm.get(campo)?.valueChanges.subscribe(value => {
         if (value !== null && value !== undefined) {
           let numericValue = Number(value.toString().replace(/\D/g, '')); // Remove não números
-          this.simulacaoForm.get(campo)?.setValue(numericValue / 100, { emitEvent: false }); // Divide por 100
+          this.simulacaoForm.get(campo)?.setValue((numericValue / 100).toFixed(2), { emitEvent: false }); // Divide por 100
         }
       });
     });
@@ -114,11 +103,8 @@ export class SimulacaoComponent implements OnInit {
   }
 
   limpar(){
-    console.log(this.simulacaoForm.value)
     this.simulacaoForm.reset();
     this.chartData = null;
   }
-
-
 
 }

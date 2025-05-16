@@ -42,7 +42,7 @@ export class SimulacaoGraficoComponent {
       labels: this._labels,
       datasets: [
         {
-          label: 'Montante Final',
+          label: '',
           backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726'],
           borderColor: ['#1E88E5', '#388E3C', '#F57C00'],
           borderWidth: 1,
@@ -53,7 +53,13 @@ export class SimulacaoGraficoComponent {
     this.options = {
       responsive: true,
       maintainAspectRatio: false,
-      scales: { y: { beginAtZero: true } }
+      scales: { y: { beginAtZero: true } },
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+
     };
   }
 }

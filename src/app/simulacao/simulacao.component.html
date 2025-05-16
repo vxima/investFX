@@ -22,8 +22,11 @@
                 </p-inputGroupAddon>
                 <p-floatlabel  variant="in">
                   <p-inputNumber id="valorInicial" formControlName="valorInicial"
-                                 mode="decimal" [prefix]="'R$ '" min="0.0" > </p-inputNumber>
-                  <label for="valorInicial">Valor inicial</label>
+                   mode="decimal" [prefix]="'R$ '" min="0.0"
+                   pTooltip="Informe o valor inicial aplicado na simulação."
+                   tooltipPosition="right">
+                  </p-inputNumber>
+                  <label for="valorInicial">Valor inicial </label>
                 </p-floatlabel>
               </p-inputgroup>
 
@@ -33,7 +36,10 @@
                 </p-inputGroupAddon>
                 <p-floatlabel  variant="in">
                   <p-inputNumber id="aporteMensal" formControlName="aporteMensal"
-                   mode="decimal" [prefix]="'R$ '" min="0.0" > </p-inputNumber>
+                   mode="decimal" [prefix]="'R$ '" min="0.0"
+                   pTooltip="Valor a ser investido mensalmente."
+                   tooltipPosition="right">
+                  </p-inputNumber>
                   <label for="aporteMensal">Aporte mensal</label>
                 </p-floatlabel>
               </p-inputgroup>
@@ -43,7 +49,11 @@
                   <i class="pi pi-calendar"></i>
                 </p-inputGroupAddon>
                 <p-floatlabel  variant="in">
-                 <p-inputNumber id="tempo" formControlName="tempo" [min]="1"></p-inputNumber>
+                 <p-inputNumber id="tempo" formControlName="tempo" [min]="1"
+                  pTooltip="Periodo de tempo que estará investido."
+                  tooltipPosition="right">
+
+                 </p-inputNumber>
                  <label for="tempo">Tempo</label>
                 </p-floatlabel>
                 <p-inputGroupAddon>
@@ -57,7 +67,9 @@
                 </p-inputGroupAddon>
                 <p-floatlabel  variant="in">
                   <p-inputNumber id="taxaDI" formControlName="taxaDI"
-                    mode="decimal" > </p-inputNumber>
+                   mode="decimal"
+                   pTooltip="Percentual atual da taxa CDI"
+                   tooltipPosition="right"> </p-inputNumber>
                   <label for="taxaDI">Taxa DI</label>
                 </p-floatlabel>
                 <p-inputGroupAddon>
@@ -71,7 +83,10 @@
                 </p-inputGroupAddon>
                 <p-floatlabel  variant="in">
                   <p-inputNumber id="taxaCDB" formControlName="taxaCDB"
-                    mode="decimal" > </p-inputNumber>
+                   mode="decimal"
+                   pTooltip="Porcentagem de rendimento em titulos CDB"
+                   tooltipPosition="right">
+                  </p-inputNumber>
                   <label for="taxaCDB">Taxa CDB</label>
                 </p-floatlabel>
                 <p-inputGroupAddon>
@@ -86,7 +101,9 @@
                 </p-inputGroupAddon>
                 <p-floatlabel  variant="in">
                   <p-inputNumber id="taxaLC" formControlName="taxaLC"
-                    mode="decimal" > </p-inputNumber>
+                   mode="decimal"
+                   pTooltip="Porcentagem de rendimento em titulos LCA/LCI"
+                   tooltipPosition="right" > </p-inputNumber>
                   <label for="taxaLC">Taxa LCA/LCI</label>
                 </p-floatlabel>
                 <p-inputGroupAddon>
