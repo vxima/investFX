@@ -89,7 +89,7 @@ export class SimulacaoComponent implements OnInit {
       this.simulacaoForm.get(campo)?.valueChanges.subscribe(value => {
         if (value !== null && value !== undefined) {
           let numericValue = Number(value.toString().replace(/\D/g, '')); // Remove não números
-          this.simulacaoForm.get(campo)?.setValue((numericValue / 100).toFixed(2), { emitEvent: false }); // Divide por 100
+          this.simulacaoForm.get(campo)?.setValue((numericValue / 100), { emitEvent: false }); // Divide por 100
         }
       });
     });
@@ -104,6 +104,9 @@ export class SimulacaoComponent implements OnInit {
 
   limpar(){
     this.simulacaoForm.reset();
+    this.simulacaoForm.get('periodo')?.setValue('mes');
+    this.simulacaoForm.get('fixadoCDB')?.setValue('pre');
+    this.simulacaoForm.get('fixadoLC')?.setValue('pre');
     this.chartData = null;
   }
 

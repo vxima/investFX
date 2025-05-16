@@ -1,4 +1,4 @@
-<app-simulacao-panel  
+<app-simulacao-panel
     [titulo]="poupanca?.titulo!"
     [percentual]="poupanca?.porcentagem || 0"
     [valorInvestido]="poupanca?.valorTotalInvestido || 0"
@@ -7,7 +7,7 @@
     [valorLiquido]="poupanca?.valorTotalLiquido || 0">
 </app-simulacao-panel>
 @if (simulacaoForm?.get('taxaCDB')?.value){
-    <app-simulacao-panel  
+    <app-simulacao-panel
     [titulo]="cdb?.titulo!"
     [percentual]="cdb?.porcentagem || 0"
     [valorInvestido]="cdb?.valorTotalInvestido || 0"
@@ -20,7 +20,7 @@
 }
 
 @if (simulacaoForm?.get('taxaLC')?.value){
-    <app-simulacao-panel  
+    <app-simulacao-panel
     [titulo]="lca_lci?.titulo!"
     [percentual]="lca_lci?.porcentagem || 0"
     [valorInvestido]="lca_lci?.valorTotalInvestido || 0"
